@@ -17,6 +17,7 @@ const register=async(req,res)=>{
 
 const login=async(req,res)=>{
     try {
+        console.log(2)
         const {password,email}=req.body
         const user=await userService.getUserByEmail(email)
         if(!user){
@@ -27,11 +28,11 @@ const login=async(req,res)=>{
         if(!isPasswordValid){
             return res.status(401).send({message:"Invalid Password..."})
         }
-        
         const jwt=jwtProvider.generateToken(user._id)
         return res.status(200).send({jwt,message:"login success"})
 
     } catch (error) {
+        console.log(error)
       return res.status(500).send({error:error.message});
       
     }

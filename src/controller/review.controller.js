@@ -12,10 +12,10 @@ const createReview=async(req,res)=>{
 
 const getAllReviews = async (req, res) => {
     try {
-        const reviews = await reviewService.getAllReview(req.params.id)
+        const reviews = await reviewService.getAllReview(req.params.productId)
         return res.status(200).send(reviews)
     } catch (error) {
-        return res.status.send(500).send({ error: error.message })
+        return res.status(500).send({ error: error.message })
     }
 }
 

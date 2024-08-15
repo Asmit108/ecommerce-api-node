@@ -41,6 +41,9 @@ app.use('/api/ratings',ratingRouters)
 const adminOrderRouters=require("./routes/adminOrder.route")
 app.use('/api/admin/orders',adminOrderRouters)
 
+const paymentRouters=require("./routes/payment.route")
+app.use('/api/payments',paymentRouters)
+
 
 module.exports=app;
 

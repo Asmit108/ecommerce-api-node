@@ -5,7 +5,7 @@ const createRating=async(reqData,user)=>{
 
     const product=await productService.findProductById(reqData.productId)
     const rating=new Rating({
-       review:reqData.rating,
+       rating:reqData.rating,
        product:product._id,
        user:user._id,
        createdAt:new Date()

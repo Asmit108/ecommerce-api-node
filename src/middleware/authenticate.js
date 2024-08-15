@@ -9,7 +9,7 @@ const authenticate=async(req,res,next)=>{
             return res.status(404).send({error:"token not found..."})
         }
         const userId=jwtProvider.getUserIdFromToken(token);
-        const user=userService.findUserById(userId);
+        const user=await userService.findUserById(userId);
         req.user=user;
      } catch (error) {
         res.status(500).send({error:error.message})

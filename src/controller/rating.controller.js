@@ -1,4 +1,4 @@
-const reviewService = require('../services/rating.service')
+const ratingService = require('../services/rating.service')
 
 const createRating = async (req, res) => {
     const user = req.user
@@ -12,10 +12,10 @@ const createRating = async (req, res) => {
 
 const getAllRatings = async (req, res) => {
     try {
-        const reviews = await reviewService.getAllRating(req.params.id)
+        const reviews = await ratingService.getAllRating(req.params.productId)
         return res.status(200).send(reviews)
     } catch (error) {
-        return res.status.send(500).send({ error: error.message })
+        return res.status(500).send({ error: error.message })
     }
 }
 

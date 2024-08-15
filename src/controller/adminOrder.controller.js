@@ -22,8 +22,8 @@ const confirmOrders = async (req, res) => {
 const shipOrders = async (req, res) => {
     const orderId = req.params.orderId;
     try {
-        const orders = await orderService.shipOrder(orderId);
-        return res.status(200).send(orderId);
+        const order = await orderService.shipOrder(orderId);
+        return res.status(200).send(order);
     } catch (error) {
         return res.status(500).send({ error: error.message })
     }
@@ -32,8 +32,8 @@ const shipOrders = async (req, res) => {
 const deliverOrders = async (req, res) => {
     const orderId = req.params.orderId;
     try {
-        const orders = await orderService.deliverOrder(orderId);
-        return res.status(200).send(orderId);
+        const order = await orderService.deliverOrder(orderId);
+        return res.status(200).send(order);
     } catch (error) {
         return res.status(500).send({ error: error.message })
     }
@@ -42,8 +42,8 @@ const deliverOrders = async (req, res) => {
 const cancelOrders = async (req, res) => {
     const orderId = req.params.orderId;
     try {
-        const orders = await orderService.cancelOrder(orderId);
-        return res.status(200).send(orderId);
+        const order = await orderService.cancelOrder(orderId);
+        return res.status(200).send(order);
     } catch (error) {
         return res.status(500).send({ error: error.message })
     }

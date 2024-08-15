@@ -39,9 +39,11 @@ const findProductById = async (req, res) => {
 
 const getAllProducts = async (req, res) => {
     try {
+        console.log("!23");
         const products = await productService.getAllProducts(req.query)
         return res.status(200).send(products)
     } catch (error) {
+        console.log(error);
         return res.status(500).send({ error: error.message })
     }
 }

@@ -5,9 +5,10 @@ const userService = require("../services/user.service");
 const { findUserCart } = require("./cart.service");
 
 const updateCartItem = async (userId, cartItemId, cartItemData) => {
-
+  console.log("cartItemId",cartItemId);
+  console.log("cartItemData",cartItemData);
   try {
-    const item = await CartItem.findById(cartItemId)
+    const item = await CartItem.findById(cartItemId).populate('product')
     if (!item) {
       throw new Error("cart item not found:", cartItemId)
     }
@@ -15,11 +16,13 @@ const updateCartItem = async (userId, cartItemId, cartItemData) => {
     if (!user) {
       throw new Error("user not found:", userId)
     }
-    if (user._id.toString() === userId.tostring()) {
+    console.log("item",item);
+    if (user._id.toString() === userId.toString()) {
       item.quantity = cartItemData.quantity;
       item.price = item.quantity * item.product.price;
       item.discountedPrice = item.quantity * item.product.discountedPrice;
       const updatedCartItem = await item.save();
+      console.log("updatedCartItem",updatedCartItem);
       return updatedCartItem;
     }
     else {
@@ -27,6 +30,7 @@ const updateCartItem = async (userId, cartItemId, cartItemData) => {
     }
 
   } catch (error) {
+    console.log(error);
     throw new Error(error.message)
   }
 }
@@ -42,7 +46,7 @@ const removeCartItem = async (userId, cartItemId) => {
     if (!user) {
       throw new Error("user not found:", userId)
     }
-    if (user._id.toString() === userId.tostring()) {
+    if (user._id.toString() === userId.toString()) {
       await CartItem.findByIdAndDelete(cartItemId);
     }
     else {

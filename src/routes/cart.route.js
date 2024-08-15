@@ -4,7 +4,7 @@ const cartController=require('../controller/cart.controller')
 const authenticate=require('../middleware/authenticate')
 
 router.get(`/`,authenticate,cartController.findUserCart)
-router.put(`/add`,authenticate,cartController.addCartItem)
+router.post(`/add`,authenticate,cartController.addCartItem)
 
 module.exports=router
 

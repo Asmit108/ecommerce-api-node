@@ -28,5 +28,5 @@ const orderItemSchema = new mongoose.Schema({
     },
 })
 
-const OrderItem = mongoose.model("orderitem", cartSchema);
+const OrderItem = mongoose.model("orderItems", orderItemSchema);
 module.exports = OrderItem;
