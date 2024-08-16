@@ -1,4 +1,4 @@
-const razorpay=require('../config/razorpayclient');
+const razorpay=require('../config/razorpayClient');
 const orderService=require('../services/order.service')
 
 const createPaymentLink=async(orderId,user)=>{
