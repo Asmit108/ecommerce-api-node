@@ -14,16 +14,16 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}     
       - name: Build Docker Image
-        run: docker build -t Asmit108/ecommerce-api-node  .
+        run: docker build -t asmit108/ecommerce-api-node  .
       - name: Publish Image to docker hub
-        run: docker push Asmit108/ecommerce-api-node:latest 
+        run: docker push asmit108/ecommerce-api-node:latest 
  
   deploy:
     needs: build
     runs-on: self-hosted 
     steps:
       - name: Pull image from docker hub
-        run: docker pull Asmit108/ecommerce-api-node:latest 
+        run: docker pull asmit108/ecommerce-api-node:latest 
       - name: Delete old container
         run: docker rm -f ecommerce-api-node-container  
       - name: Run Docker Container
