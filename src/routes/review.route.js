@@ -4,7 +4,7 @@ const reviewController=require('../controller/review.controller')
 const authenticate=require('../middleware/authenticate')
 
 router.post(`/create`,authenticate,reviewController.createReview)
-router.get(`/product/:productId`,authenticate,reviewController.getAllReviews)
+router.get(`/product/:productId`,reviewController.getAllReviews)
 
 
 module.exports=router
