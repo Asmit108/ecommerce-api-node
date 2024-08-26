@@ -17,7 +17,7 @@ const createPaymentLink=async(orderId,user)=>{
                 email:true,
             },
             reminder_enable:true,
-            callback_url:"http://localhost:3000/payment/${orderId}",
+            callback_url:"http://13.126.181.50:3000/payment/${orderId}",
             callback_method:"get"
         };
         console.log("p");
