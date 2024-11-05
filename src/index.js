@@ -5,20 +5,23 @@ const cors=require('cors')
 const app=express()
 
 app.use(express.json())
-app.use(cors())
+app.use(cors())   
 
-app.get("/",(req,res)=>{
+app.get("/",(req,res)=>{ 
     return res.status(200).send({message: "welcome to ecommerce-api-node",status:true})
 })
 
 const authRouters=require("./routes/auth.route")
-app.use('/api/auth',authRouters)
+app.use('/api/auth',authRouters)   
 
 const userRouters=require("./routes/user.route")
 app.use('/api/users',userRouters)
 
 const productRouters=require("./routes/product.route")
 app.use('/api/products',productRouters)
+
+const adminUserRouters=require("./routes/adminUser.route")
+app.use('/api/admin/users',adminUserRouters)
 
 const adminProductRouters=require("./routes/adminProduct.route")
 app.use('/api/admin/products',adminProductRouters)

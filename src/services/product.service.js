@@ -63,7 +63,7 @@ const findProductById = async (productId) => {
 const getAllProducts = async (reqQuery) => {
     let { category, color, sizes, minPrice, maxPrice, minDiscount, sort, stock, pageNumber, pageSize } = reqQuery;
     if (pageSize < 10) {
-        pageSize = 10;
+        pageSize = 10;       
     }
     if (pageNumber <= 0) {
         pageNumber = 1;
@@ -71,7 +71,9 @@ const getAllProducts = async (reqQuery) => {
 
     // console.log("server");
 
-    let query = Product.find().populate("category");
+    let query = Product.find().populate("category");  
+   
+    
     if (category && category !== '') {
         console.log("cat",category);
         const existCategory = await Category.findOne({ name: category });
@@ -84,14 +86,14 @@ const getAllProducts = async (reqQuery) => {
     }
 
     if (color && color.length > 0) {
-        // console.log("color");
+        console.log("color");
         const colorSet = new Set(color.split(',').map(color => color.trim().toLowerCase()));
         const colorRegex = colorSet.size > 0 ? new RegExp([...colorSet].join("|"), "i") : null;
         query = query.where("color").regex(colorRegex);
     }
 
     if (sizes && sizes.length > 0) {
-        // console.log("sizes");
+        console.log("sizes");
         const sizeSet = new Set(sizes.split(',').map(sizes => sizes.trim().toLowerCase()));
         const sizesRegex = sizeSet.size > 0 ? new RegExp([...sizeSet].join("|"), "i") : null;
         query = query.where("sizes.name").regex(sizesRegex);
@@ -107,7 +109,7 @@ const getAllProducts = async (reqQuery) => {
     }
 
     if (stock && stock !== '') {
-        // console.log("stock");
+        console.log("stock");
         const stockSet = new Set(stock.split(',').map(stock => stock.trim().toLowerCase()));
         if (stockSet.has("in stock")) {
             query = query.where("quantity").gt(0);
@@ -118,14 +120,14 @@ const getAllProducts = async (reqQuery) => {
     }
 
     if (sort) {
-        // console.log("sort");
+        console.log("sort");
         const sortDirection = sort === "price_high" ? -1 : 1;
         query = query.sort({ discountedPrice: sortDirection });
     }
 
 
     const totalProducts = await Product.countDocuments(query);
-    // console.log("Total products:", totalProducts);
+    console.log("Total products:", totalProducts);
     console.log(totalProducts);
     const skip = (pageNumber - 1) * pageSize;
     query = query.skip(skip).limit(pageSize);

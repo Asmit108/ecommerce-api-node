@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const jwtProvider = require('../config/jwtProvider')
 const createUser = async (userData) => {
     try {
-        let {firstName, lastName, email, password} = userData;
+        let { firstName, lastName, email, password } = userData;
 
         const isUserExist = await User.findOne({ email })
 
@@ -38,8 +38,8 @@ const findUserById = async (userId) => {
 
 const getUserByEmail = async (email) => {
     try {
-        const user = await User.findOne({email:email});
-        
+        const user = await User.findOne({ email: email });
+
         if (!user) {
             throw new Error("User not found with email:", email);
         }
@@ -76,4 +76,19 @@ const getAllUsers = async () => {
     }
 }
 
-module.exports = { createUser, findUserById, getUserByEmail, getUserProfileByToken, getAllUsers }
+const changeRole = async (req) => {
+    try {
+        const user = await findUserById(req.userId)
+        if (!user) {
+            throw new Error("User not found with id:", userId);
+        }
+        user.role = req.newRole
+        await user.save()
+        return user
+    } catch (error) {
+        console.log(error)
+        throw new Error(error.message)
+    }
+}
+
+module.exports = { createUser, findUserById, getUserByEmail, getUserProfileByToken, getAllUsers, changeRole }
